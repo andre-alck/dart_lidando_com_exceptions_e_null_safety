@@ -1,19 +1,29 @@
+import 'dart:io';
+
 main() {
-  print('started main');
+  print('STARTED:\tmain');
   functionOne();
-  print('finished main');
+  print('FINISHED:\tmain');
 }
 
 functionOne() {
-  print('started functionOne');
-  functionTwo();
-  print('finished functionOne');
+  print('STARTED:\tfunctionOne');
+  try {
+    functionTwo();
+  } on IOException catch (ioException) {
+    print('IOException:\t$ioException');
+  } finally {
+    print('FINALLY');
+  }
+
+  print('FINISHED:\tfunctionOne');
 }
 
 functionTwo() {
-  print('started functionTwo');
+  print('STARTED:\tfunctionTwo');
   for (int i = 0; i < 5; i++) {
     print(i);
+    double amount = double.parse('Not a number.');
   }
-  print('finished functionTwo');
+  print('FINISHED:\tfunctionTwo');
 }
