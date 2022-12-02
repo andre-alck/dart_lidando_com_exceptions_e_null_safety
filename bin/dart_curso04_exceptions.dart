@@ -1,29 +1,25 @@
-import 'dart:io';
+import 'controllers/bank_controller.dart';
+import 'models/account.dart';
 
-main() {
-  print('STARTED:\tmain');
-  functionOne();
-  print('FINISHED:\tmain');
-}
+void main() {
+  // Criando o banco
+  BankController bankController = BankController();
 
-functionOne() {
-  print('STARTED:\tfunctionOne');
-  try {
-    functionTwo();
-  } on IOException catch (ioException) {
-    print('IOException:\t$ioException');
-  } finally {
-    print('FINALLY');
-  }
+  // Adicionando contas
+  bankController.addAccount(
+      id: "Ricarth",
+      account:
+          Account(name: "Ricarth Lima", balance: 400, isAuthenticated: true));
 
-  print('FINISHED:\tfunctionOne');
-}
+  bankController.addAccount(
+      id: "Kako",
+      account:
+          Account(name: "Caio Couto", balance: 600, isAuthenticated: true));
 
-functionTwo() {
-  print('STARTED:\tfunctionTwo');
-  for (int i = 0; i < 5; i++) {
-    print(i);
-    double amount = double.parse('Not a number.');
-  }
-  print('FINISHED:\tfunctionTwo');
+  // Fazendo transferência
+  bool result = bankController.makeTransfer(
+      idSender: "Kako", idReceiver: "Ricarth", amount: 700);
+
+  // Observando resultado
+  print(result);
 }
